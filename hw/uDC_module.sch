@@ -14301,6 +14301,12 @@ Source: http://datasheets.maxim-ic.com/en/ds/MAX4335-MAX4338.pdf</description>
 <text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
 <pin name="+V" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
 </symbol>
+<symbol name="+5V">
+<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
+<text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="+5V" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="GND" prefix="GND">
@@ -14320,6 +14326,19 @@ Source: http://datasheets.maxim-ic.com/en/ds/MAX4335-MAX4338.pdf</description>
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
 <gate name="1" symbol="+V" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="+5V" prefix="P+">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="+5V" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -14500,6 +14519,33 @@ www.fma.fujitsu.com/pdf/e713717.pdf</description>
 <wire x1="-3.5" y1="-3.5" x2="-3.5" y2="3.5" width="0.1" layer="21"/>
 <circle x="-2.5" y="2.5" radius="0.5" width="0.1" layer="21"/>
 </package>
+<package name="SOT23-5L">
+<description>&lt;b&gt;Small Outline Transistor&lt;/b&gt;&lt;p&gt;
+package type OT</description>
+<wire x1="1.422" y1="0.81" x2="1.422" y2="-0.81" width="0.1524" layer="21"/>
+<wire x1="1.422" y1="-0.81" x2="-1.422" y2="-0.81" width="0.1524" layer="51"/>
+<wire x1="-1.422" y1="-0.81" x2="-1.422" y2="0.81" width="0.1524" layer="21"/>
+<wire x1="-1.422" y1="0.81" x2="1.422" y2="0.81" width="0.1524" layer="51"/>
+<wire x1="-0.522" y1="0.81" x2="0.522" y2="0.81" width="0.1524" layer="21"/>
+<wire x1="-0.428" y1="-0.81" x2="-0.522" y2="-0.81" width="0.1524" layer="21"/>
+<wire x1="0.522" y1="-0.81" x2="0.428" y2="-0.81" width="0.1524" layer="21"/>
+<wire x1="-1.328" y1="-0.81" x2="-1.422" y2="-0.81" width="0.1524" layer="21"/>
+<wire x1="1.422" y1="-0.81" x2="1.328" y2="-0.81" width="0.1524" layer="21"/>
+<wire x1="1.328" y1="0.81" x2="1.422" y2="0.81" width="0.1524" layer="21"/>
+<wire x1="-1.422" y1="0.81" x2="-1.328" y2="0.81" width="0.1524" layer="21"/>
+<smd name="1" x="-0.95" y="-1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="2" x="0" y="-1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="3" x="0.95" y="-1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="4" x="0.95" y="1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="5" x="-0.95" y="1.3" dx="0.55" dy="1.2" layer="1"/>
+<text x="-1.905" y="1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.905" y="-3.429" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.2" y1="-1.5" x2="-0.7" y2="-0.85" layer="51"/>
+<rectangle x1="-0.25" y1="-1.5" x2="0.25" y2="-0.85" layer="51"/>
+<rectangle x1="0.7" y1="-1.5" x2="1.2" y2="-0.85" layer="51"/>
+<rectangle x1="0.7" y1="0.85" x2="1.2" y2="1.5" layer="51"/>
+<rectangle x1="-1.2" y1="0.85" x2="-0.7" y2="1.5" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="STM32F103CX">
@@ -14555,6 +14601,19 @@ www.fma.fujitsu.com/pdf/e713717.pdf</description>
 <pin name="PC13" x="2.54" y="30.48" length="middle" rot="R270"/>
 <pin name="PC14" x="0" y="30.48" length="middle" rot="R270"/>
 <pin name="PC15" x="-2.54" y="30.48" length="middle" rot="R270"/>
+</symbol>
+<symbol name="LD3985XX">
+<wire x1="-10.16" y1="5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
+<text x="-9.906" y="6.35" size="1.778" layer="94">&gt;NAME</text>
+<text x="-10.16" y="-7.62" size="1.778" layer="94">&gt;VALUE</text>
+<pin name="VIN" x="-15.24" y="2.54" length="middle"/>
+<pin name="INHIBIT" x="-15.24" y="0" length="middle"/>
+<pin name="GND" x="-15.24" y="-2.54" length="middle"/>
+<pin name="VOUT" x="15.24" y="2.54" length="middle" rot="R180"/>
+<pin name="BYPASS" x="15.24" y="-2.54" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -14668,6 +14727,25 @@ www.fma.fujitsu.com/pdf/e713717.pdf</description>
 <connect gate="G$1" pin="VSS_2" pad="P$35"/>
 <connect gate="G$1" pin="VSS_3" pad="P$47"/>
 <connect gate="G$1" pin="VSS_A" pad="P$8"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LD3985XX">
+<gates>
+<gate name="G$1" symbol="LD3985XX" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOT23-5L">
+<connects>
+<connect gate="G$1" pin="BYPASS" pad="4"/>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="INHIBIT" pad="3"/>
+<connect gate="G$1" pin="VIN" pad="1"/>
+<connect gate="G$1" pin="VOUT" pad="5"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -15490,7 +15568,6 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <part name="GND3" library="supply" deviceset="GND" device=""/>
 <part name="U$3" library="maxim" deviceset="MAX17501" device=""/>
 <part name="J1" library="OPL Eagle Library" deviceset="GROVE-4P-2.0" device="-3470130P1"/>
-<part name="+3V7" library="supply1" deviceset="+3V3" device=""/>
 <part name="U$6" library="st" deviceset="STM32F103CX" device="TX"/>
 <part name="FRAME1" library="frames" deviceset="DINA3_L" device=""/>
 <part name="GND13" library="supply" deviceset="GND" device=""/>
@@ -15517,6 +15594,15 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <part name="X4" library="con-molex" deviceset="53?-06" device="047"/>
 <part name="GND14" library="supply" deviceset="GND" device=""/>
 <part name="U$7" library="freescale" deviceset="MC33962" device=""/>
+<part name="U5" library="st" deviceset="LD3985XX" device=""/>
+<part name="GND25" library="supply1" deviceset="GND" device=""/>
+<part name="+3V9" library="supply1" deviceset="+3V3" device=""/>
+<part name="C18" library="rcl" deviceset="C-EU" device="C0603" value="1u"/>
+<part name="C19" library="rcl" deviceset="C-EU" device="C0603" value="1u"/>
+<part name="GND26" library="supply1" deviceset="GND" device=""/>
+<part name="GND28" library="supply1" deviceset="GND" device=""/>
+<part name="P+10" library="supply" deviceset="+5V" device=""/>
+<part name="P+3" library="supply" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -15599,7 +15685,6 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <instance part="GND3" gate="1" x="114.3" y="106.68"/>
 <instance part="U$3" gate="G$1" x="96.52" y="121.92"/>
 <instance part="J1" gate="J" x="71.12" y="21.59"/>
-<instance part="+3V7" gate="G$1" x="134.62" y="139.7"/>
 <instance part="U$6" gate="G$1" x="55.88" y="205.74"/>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="FRAME1" gate="G$2" x="287.02" y="0"/>
@@ -15639,6 +15724,15 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <instance part="X4" gate="-6" x="233.68" y="96.52"/>
 <instance part="GND14" gate="1" x="294.64" y="137.16"/>
 <instance part="U$7" gate="G$1" x="223.52" y="185.42"/>
+<instance part="U5" gate="G$1" x="215.9" y="33.02"/>
+<instance part="GND25" gate="1" x="198.12" y="25.4"/>
+<instance part="+3V9" gate="G$1" x="236.22" y="40.64"/>
+<instance part="C18" gate="G$1" x="238.76" y="33.02"/>
+<instance part="C19" gate="G$1" x="190.5" y="33.02"/>
+<instance part="GND26" gate="1" x="190.5" y="25.4"/>
+<instance part="GND28" gate="1" x="238.76" y="25.4"/>
+<instance part="P+10" gate="1" x="190.5" y="40.64"/>
+<instance part="P+3" gate="1" x="134.62" y="139.7"/>
 </instances>
 <busses>
 </busses>
@@ -15839,6 +15933,20 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <pinref part="C11" gate="G$1" pin="-"/>
 <pinref part="GND14" gate="1" pin="GND"/>
 </segment>
+<segment>
+<wire x1="200.66" y1="30.48" x2="198.12" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="30.48" x2="198.12" y2="27.94" width="0.1524" layer="91"/>
+<pinref part="U5" gate="G$1" pin="GND"/>
+<pinref part="GND25" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C19" gate="G$1" pin="2"/>
+<pinref part="GND26" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C18" gate="G$1" pin="2"/>
+<pinref part="GND28" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -15915,16 +16023,13 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<wire x1="111.76" y1="121.92" x2="129.54" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="121.92" x2="129.54" y2="132.08" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="2"/>
-<wire x1="129.54" y1="132.08" x2="134.62" y2="132.08" width="0.1524" layer="91"/>
-<junction x="129.54" y="132.08"/>
-<pinref part="C9" gate="G$1" pin="1"/>
-<pinref part="U$3" gate="G$1" pin="FB"/>
-<wire x1="134.62" y1="132.08" x2="134.62" y2="137.16" width="0.1524" layer="91"/>
-<junction x="134.62" y="132.08"/>
-<pinref part="+3V7" gate="G$1" pin="+3V3"/>
+<wire x1="231.14" y1="35.56" x2="236.22" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="35.56" x2="236.22" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="35.56" x2="238.76" y2="35.56" width="0.1524" layer="91"/>
+<junction x="236.22" y="35.56"/>
+<pinref part="U5" gate="G$1" pin="VOUT"/>
+<pinref part="+3V9" gate="G$1" pin="+3V3"/>
+<pinref part="C18" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="JTMS" class="0">
@@ -16238,6 +16343,33 @@ wire to board 1.25 mm (.049 inch) pitch header</description>
 <wire x1="205.74" y1="195.58" x2="203.2" y2="195.58" width="0.1524" layer="91"/>
 <label x="203.2" y="195.58" size="1.778" layer="95" rot="MR0"/>
 <pinref part="U$7" gate="G$1" pin="EN"/>
+</segment>
+</net>
+<net name="+5V" class="0">
+<segment>
+<pinref part="U5" gate="G$1" pin="VIN"/>
+<pinref part="C19" gate="G$1" pin="1"/>
+<wire x1="190.5" y1="35.56" x2="198.12" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="U5" gate="G$1" pin="INHIBIT"/>
+<wire x1="198.12" y1="35.56" x2="200.66" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="33.02" x2="198.12" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="33.02" x2="198.12" y2="35.56" width="0.1524" layer="91"/>
+<junction x="198.12" y="35.56"/>
+<pinref part="P+10" gate="1" pin="+5V"/>
+<wire x1="190.5" y1="38.1" x2="190.5" y2="35.56" width="0.1524" layer="91"/>
+<junction x="190.5" y="35.56"/>
+</segment>
+<segment>
+<wire x1="111.76" y1="121.92" x2="129.54" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="121.92" x2="129.54" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="2"/>
+<wire x1="129.54" y1="132.08" x2="134.62" y2="132.08" width="0.1524" layer="91"/>
+<junction x="129.54" y="132.08"/>
+<pinref part="C9" gate="G$1" pin="1"/>
+<pinref part="U$3" gate="G$1" pin="FB"/>
+<wire x1="134.62" y1="132.08" x2="134.62" y2="137.16" width="0.1524" layer="91"/>
+<junction x="134.62" y="132.08"/>
+<pinref part="P+3" gate="1" pin="+5V"/>
 </segment>
 </net>
 </nets>
