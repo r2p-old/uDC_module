@@ -2,7 +2,7 @@
 EAGLE := /opt/eagle-6.6.0/bin/eagle
 
 # Gerbv PCB image preview parameters - colours, plus resolution
-GERBER_IMAGE_RESOLUTION?=600
+GERBER_IMAGE_RESOLUTION?=1200
 BACKGROUND_COLOUR?=000000
 HOLES_COLOUR?=000000
 SILKSCREEN_COLOUR?=C4C4C4
@@ -34,7 +34,7 @@ doc: gerbers pdf png
 
 ### GERBER FILES GENERATION
 
-2layers: $(PROJECT_NAME).GTL $(PROJECT_NAME).GTS $(PROJECT_NAME).GTO $(PROJECT_NAME).GTP $(PROJECT_NAME).GBL $(PROJECT_NAME).GBS $(PROJECT_NAME).GBO $(PROJECT_NAME).GBP  $(PROJECT_NAME).TXT $(PROJECT_NAME).GML
+2layers: $(PROJECT_NAME).GTL $(PROJECT_NAME).GTS $(PROJECT_NAME).GTO $(PROJECT_NAME).GTP $(PROJECT_NAME).GBL $(PROJECT_NAME).GBS $(PROJECT_NAME).GBO $(PROJECT_NAME).GBP  $(PROJECT_NAME).TXT $(PROJECT_NAME).GML 
 	zip $(PROJECT_NAME)-gerbers.zip $(PROJECT_NAME).{GTL,GTS,GTO,GTP,GBL,GBS,GBO,GBP,TXT,dri,gpi}
 	
 # Top layer - copper
@@ -71,6 +71,10 @@ doc: gerbers pdf png
 %.GML : %.brd
 	$(EAGLE) -X -N -d GERBER_RS274X -o $@ $< Dimension
 
+# Component placement
+%.place : %.brd
+	$(EAGLE) -X -N -d GERBER_RS274X -o $@ $< tPlace tDocu
+
 
 ### DOCUMENTATION GENERATION
 pdf:
@@ -78,18 +82,19 @@ pdf:
 	ps2pdf $(PROJECT_NAME)-schematic.ps $(PROJECT_NAME)-schematic.pdf
 	@rm $(PROJECT_NAME)-schematic.ps
 	
-png:
+png:  $(PROJECT_NAME).GTL $(PROJECT_NAME).GTS $(PROJECT_NAME).GTO $(PROJECT_NAME).GTP $(PROJECT_NAME).GBL $(PROJECT_NAME).GBS $(PROJECT_NAME).GBO $(PROJECT_NAME).GBP  $(PROJECT_NAME).TXT $(PROJECT_NAME).GML $(PROJECT_NAME).place
 	`gerbv --export=png --output=$(PROJECT_NAME)-layout.png --dpi=$(GERBER_IMAGE_RESOLUTION) \
-	--background=#333333 --foreground=#$(HOLES_COLOUR) $(PROJECT_NAME).TXT \
+	--background=#000000 --foreground=#$(HOLES_COLOUR) $(PROJECT_NAME).TXT \
 	--foreground=#$(SILKSCREEN_COLOUR) $(PROJECT_NAME).GTO \
+	--foreground=#$(SILKSCREEN_COLOUR) $(PROJECT_NAME).place \
 	--foreground=#$(PADS_COLOUR) $(PROJECT_NAME).GTS \
 	--foreground=#$(TOP_SOLDERMASK_COLOUR) $(PROJECT_NAME).GTL \
-	--background=#222222 --foreground=#$(BOTTOM_SOLDERMASK_COLOUR) $(PROJECT_NAME).GBL`
+	--foreground=#$(BOTTOM_SOLDERMASK_COLOUR) $(PROJECT_NAME).GBL `
 
 ### CLEAN ###
 
 clean:
-	rm -rf $(PROJECT_NAME).{GTL,GTS,GTO,GTP,GBL,GBS,GBO,GBP,TXT,GML,dri,gpi}
+	rm -rf $(PROJECT_NAME).{GTL,GTS,GTO,GTP,GBL,GBS,GBO,GBP,TXT,GML,dri,gpi,place}
 	rm -rf $(PROJECT_NAME)-gerbers.zip
 	rm -rf $(PROJECT_NAME)-schematic.pdf
 	rm -rf $(PROJECT_NAME)-layout.png
