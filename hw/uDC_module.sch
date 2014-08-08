@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.4">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -15669,8 +15669,8 @@ http://dangerousprototypes.com</description>
 <part name="GND20" library="supply" deviceset="GND" device=""/>
 <part name="C13" library="rcl" deviceset="C-EU" device="C0603" value="100n"/>
 <part name="GND21" library="supply1" deviceset="GND" device=""/>
-<part name="C15" library="rcl" deviceset="C-EU" device="C0603" value="100n"/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="R0603" value="10k"/>
+<part name="C15" library="rcl" deviceset="C-EU" device="C0603" value="470n"/>
+<part name="R2" library="rcl" deviceset="R-EU_" device="R0603" value="220"/>
 <part name="GND23" library="supply" deviceset="GND" device=""/>
 <part name="GND24" library="supply" deviceset="GND" device=""/>
 <part name="X4" library="con-molex" deviceset="53?-06" device="047"/>
@@ -16460,9 +16460,9 @@ http://dangerousprototypes.com</description>
 <pinref part="U$7" gate="G$1" pin="IN2"/>
 </segment>
 <segment>
-<pinref part="U$6" gate="G$1" pin="PA8"/>
-<wire x1="50.8" y1="177.8" x2="50.8" y2="175.26" width="0.1524" layer="91"/>
-<label x="50.8" y="175.26" size="1.778" layer="95" rot="MR270"/>
+<pinref part="U$6" gate="G$1" pin="PA9"/>
+<wire x1="53.34" y1="177.8" x2="53.34" y2="175.26" width="0.1524" layer="91"/>
+<label x="53.34" y="175.26" size="1.778" layer="95" rot="MR270"/>
 </segment>
 </net>
 <net name="IN1" class="0">
@@ -16472,9 +16472,9 @@ http://dangerousprototypes.com</description>
 <pinref part="U$7" gate="G$1" pin="IN1"/>
 </segment>
 <segment>
-<pinref part="U$6" gate="G$1" pin="PB13"/>
-<wire x1="66.04" y1="236.22" x2="66.04" y2="238.76" width="0.1524" layer="91"/>
-<label x="66.04" y="238.76" size="1.778" layer="95" rot="R90"/>
+<pinref part="U$6" gate="G$1" pin="PA8"/>
+<wire x1="50.8" y1="177.8" x2="50.8" y2="175.26" width="0.1524" layer="91"/>
+<label x="50.8" y="175.26" size="1.778" layer="95" rot="MR270"/>
 </segment>
 </net>
 <net name="EN" class="0">
@@ -16570,7 +16570,7 @@ http://dangerousprototypes.com</description>
 <label x="86.36" y="205.74" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="ANALOG" class="0">
+<net name="ENC_ANALOG" class="0">
 <segment>
 <pinref part="X4" gate="-6" pin="S"/>
 <wire x1="231.14" y1="96.52" x2="226.06" y2="96.52" width="0.1524" layer="91"/>
