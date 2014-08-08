@@ -1,21 +1,17 @@
 /*
-    ChibiOS/RT - Copyright (C) 2006,2007,2008,2009,2010,
-                 2011 Giovanni Di Sirio.
+    ChibiOS/RT - Copyright (C) 2006-2013 Giovanni Di Sirio
 
-    This file is part of ChibiOS/RT.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-    ChibiOS/RT is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+        http://www.apache.org/licenses/LICENSE-2.0
 
-    ChibiOS/RT is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 */
 
 /**
@@ -33,6 +29,13 @@
 #define _HALCONF_H_
 
 #include "mcuconf.h"
+
+/**
+ * @brief   Enables the TM subsystem.
+ */
+#if !defined(HAL_USE_TM) || defined(__DOXYGEN__)
+#define HAL_USE_TM                  FALSE
+#endif
 
 /**
  * @brief   Enables the PAL subsystem.
@@ -59,7 +62,7 @@
  * @brief   Enables the EXT subsystem.
  */
 #if !defined(HAL_USE_EXT) || defined(__DOXYGEN__)
-#define HAL_USE_EXT                 FALSE
+#define HAL_USE_EXT                 TRUE
 #endif
 
 /**
@@ -80,7 +83,7 @@
  * @brief   Enables the ICU subsystem.
  */
 #if !defined(HAL_USE_ICU) || defined(__DOXYGEN__)
-#define HAL_USE_ICU                 TRUE
+#define HAL_USE_ICU                 FALSE
 #endif
 
 /**
@@ -101,14 +104,7 @@
  * @brief   Enables the PWM subsystem.
  */
 #if !defined(HAL_USE_PWM) || defined(__DOXYGEN__)
-#define HAL_USE_PWM                 FALSE
-#endif
-
-/**
- * @brief   Enables the QEI subsystem.
- */
-#if !defined(HAL_USE_QEI) || defined(__DOXYGEN__)
-#define HAL_USE_QEI                 FALSE
+#define HAL_USE_PWM                 TRUE
 #endif
 
 /**
@@ -129,7 +125,7 @@
  * @brief   Enables the SERIAL subsystem.
  */
 #if !defined(HAL_USE_SERIAL) || defined(__DOXYGEN__)
-#define HAL_USE_SERIAL              TRUE
+#define HAL_USE_SERIAL              FALSE
 #endif
 
 /**
@@ -209,6 +205,13 @@
 /**
  * @brief   Enables an event sources for incoming packets.
  */
+#if !defined(MAC_USE_ZERO_COPY) || defined(__DOXYGEN__)
+#define MAC_USE_ZERO_COPY           FALSE
+#endif
+
+/**
+ * @brief   Enables an event sources for incoming packets.
+ */
 #if !defined(MAC_USE_EVENTS) || defined(__DOXYGEN__)
 #define MAC_USE_EVENTS              TRUE
 #endif
@@ -216,13 +219,6 @@
 /*===========================================================================*/
 /* MMC_SPI driver related settings.                                          */
 /*===========================================================================*/
-
-/**
- * @brief   Block size for MMC transfers.
- */
-#if !defined(MMC_SECTOR_SIZE) || defined(__DOXYGEN__)
-#define MMC_SECTOR_SIZE             512
-#endif
 
 /**
  * @brief   Delays insertions.
@@ -236,39 +232,13 @@
 #define MMC_NICE_WAITING            TRUE
 #endif
 
-/**
- * @brief   Number of positive insertion queries before generating the
- *          insertion event.
- */
-#if !defined(MMC_POLLING_INTERVAL) || defined(__DOXYGEN__)
-#define MMC_POLLING_INTERVAL        10
-#endif
-
-/**
- * @brief   Interval, in milliseconds, between insertion queries.
- */
-#if !defined(MMC_POLLING_DELAY) || defined(__DOXYGEN__)
-#define MMC_POLLING_DELAY           10
-#endif
-
-/**
- * @brief   Uses the SPI polled API for small data transfers.
- * @details Polled transfers usually improve performance because it
- *          saves two context switches and interrupt servicing. Note
- *          that this option has no effect on large transfers which
- *          are always performed using DMAs/IRQs.
- */
-#if !defined(MMC_USE_SPI_POLLING) || defined(__DOXYGEN__)
-#define MMC_USE_SPI_POLLING         TRUE
-#endif
-
 /*===========================================================================*/
 /* SDC driver related settings.                                              */
 /*===========================================================================*/
 
 /**
  * @brief   Number of initialization attempts before rejecting the card.
- * @note    Attempts are performed at 10mS intevals.
+ * @note    Attempts are performed at 10mS intervals.
  */
 #if !defined(SDC_INIT_RETRY) || defined(__DOXYGEN__)
 #define SDC_INIT_RETRY              100
@@ -303,7 +273,7 @@
  *          default configuration.
  */
 #if !defined(SERIAL_DEFAULT_BITRATE) || defined(__DOXYGEN__)
-#define SERIAL_DEFAULT_BITRATE      115200
+#define SERIAL_DEFAULT_BITRATE      38400
 #endif
 
 /**
@@ -314,7 +284,7 @@
  *          buffers.
  */
 #if !defined(SERIAL_BUFFERS_SIZE) || defined(__DOXYGEN__)
-#define SERIAL_BUFFERS_SIZE         256
+#define SERIAL_BUFFERS_SIZE         16
 #endif
 
 /*===========================================================================*/

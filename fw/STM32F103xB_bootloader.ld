@@ -166,4 +166,3 @@ __heap_end__        = __ram_end__;
 
 __program_start__   = _textdata + (_edata - _data);
 __program_end__     = ORIGIN(flash) + LENGTH(flash);
-

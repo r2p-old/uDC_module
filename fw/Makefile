@@ -67,9 +67,9 @@ PROJECT = fw
 
 # Imported source files and paths
 include ../../paths.mk
-include $(CHIBIOS)/os/hal/platforms/STM32F1xx/platform.mk
+include $(CHIBIOS)/os/hal/platforms/STM32F30x/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
-include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F1xx/port.mk
+include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F3xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
 include $(RTCAN)/platforms/STM32/platform.mk
 include $(RTCAN)/RTCAN.mk
@@ -94,11 +94,22 @@ CSRC = $(PORTSRC) \
        stubs.c \
        board.c
 
+ifeq ($(TEST),blinking_led)
+  CSRC += test/blinking_led.c
+endif
+
+ifeq ($(TEST),hardware_test)
+  CSRC += test/hardware_test.c
+endif
+
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(R2PSRC) \
-         chnew.cpp \
-         main.cpp
+         chnew.cpp
+
+ifeq ($(TEST),)
+  CPPSRC += main.cpp
+endif
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
