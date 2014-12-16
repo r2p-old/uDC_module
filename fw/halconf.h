@@ -157,6 +157,17 @@
 #endif
 
 /*===========================================================================*/
+/* Custom drivers.                                                           */
+/*===========================================================================*/
+
+/**
+ * @brief   Enables the QEI subsystem.
+ */
+#if !defined(HAL_USE_QEI) || defined(__DOXYGEN__)
+#define HAL_USE_QEI                 TRUE
+#endif
+
+/*===========================================================================*/
 /* ADC driver related settings.                                              */
 /*===========================================================================*/
 
@@ -273,7 +284,7 @@
  *          default configuration.
  */
 #if !defined(SERIAL_DEFAULT_BITRATE) || defined(__DOXYGEN__)
-#define SERIAL_DEFAULT_BITRATE      38400
+#define SERIAL_DEFAULT_BITRATE      115200
 #endif
 
 /**

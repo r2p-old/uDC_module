@@ -1,6 +1,8 @@
 #include "ch.h"
 #include "hal.h"
 
+#include "qei.h"
+
 int16_t pwm = 0;
 int16_t increment = 200;
 
@@ -30,7 +32,7 @@ static void pwmcb(PWMDriver *pwmp) {
 /*
  * PWM configuration.
  */
-static PWMConfig pwmcfg = { 18000000, /* 72MHz PWM clock frequency.   */
+static PWMConfig pwm_config = { 18000000, /* 72MHz PWM clock frequency.   */
 4096, /* 12-bit PWM, 17KHz frequency. */
 pwmcb, {
 		{ PWM_OUTPUT_ACTIVE_HIGH, NULL },
@@ -39,22 +41,37 @@ pwmcb, {
 		{ PWM_OUTPUT_DISABLED, NULL }}, 0,
 		};
 
+/*===========================================================================*/
+/* QEI related.                                                        */
+/*===========================================================================*/
+
+QEIConfig qei_config = {
+        QEI_MODE_QUADRATURE,
+        QEI_BOTH_EDGES,
+        QEI_DIRINV_FALSE,
+};
+
 /*
  * Application entry point.
  */
 int main(void) {
+	qeidelta_t delta;
 
 	halInit();
 	chSysInit();
 
 	/* Activate the PWM driver. */
-	pwmStart(&PWMD1, &pwmcfg);
+	pwmStart(&PWMD1, &pwm_config);
+
+	/* Activate the QEI driver. */
+	qeiInit();
+	qeiStart(&QEID4, &qei_config);
+	qeiEnable(&QEID4);
 
 	/* Enable the h-bridge. */
 	palSetPad(GPIOB, GPIOB_MOTOR_ENABLE);
 	palClearPad(GPIOA, GPIOA_MOTOR_D1);
 	chThdSleepMilliseconds(500);
-
 
 	for (;;) {
 		pwm += increment;
@@ -63,8 +80,12 @@ int main(void) {
 			increment = -increment;
 		}
 
+		delta = qeiUpdate(&QEID4);
 		palTogglePad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(500);
+		if (delta > 10000) {
+			chThdSleepMilliseconds(500);
+		}
 	}
 
 	return CH_SUCCESS;

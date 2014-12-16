@@ -43,6 +43,10 @@
 
 #define STM32_HSE_BYPASS
 
+#define PWM_DRIVER PWMD1
+#define QEI_DRIVER QEID4
+
+
 /*
  * MCU type as defined in the ST header.
  */
@@ -152,6 +156,15 @@
 #define GPIOF_PIN13                 13
 #define GPIOF_PIN14                 14
 #define GPIOF_PIN15                 15
+
+#define LED1_GPIO	GPIOC
+#define LED2_GPIO	GPIOC
+#define LED3_GPIO	GPIOC
+#define LED4_GPIO	GPIOC
+#define LED1		13
+#define LED2		13
+#define LED3		13
+#define LED4		13
 
 /*
  * I/O ports initial setup, this configuration is established soon after reset
