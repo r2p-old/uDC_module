@@ -3177,6 +3177,21 @@ design rules under a new name.</description>
 <wire x1="24.3" y1="18.7" x2="24.3" y2="19.3" width="0.2" layer="16"/>
 </signal>
 </signals>
+<errors>
+<approved hash="7,39,f8fc106c781cd2d6"/>
+<approved hash="7,39,e698f99ce564e680"/>
+<approved hash="7,39,a3d26191e19723d4"/>
+<approved hash="7,39,552d11609160d52d"/>
+<approved hash="7,39,e27a7cf36306a4d6"/>
+<approved hash="7,39,f800e698f99c24d6"/>
+<approved hash="7,39,55ec05f9bcbd974c"/>
+<approved hash="7,39,2894e6db66dca893"/>
+<approved hash="7,39,7c423a0fba0ffc42"/>
+<approved hash="19,1,d16939b5f7647a6d"/>
+<approved hash="19,1,d1786cf587541121"/>
+<approved hash="19,1,682bae384b108723"/>
+<approved hash="19,1,27472c992c9b2745"/>
+</errors>
 </board>
 </drawing>
 </eagle>
