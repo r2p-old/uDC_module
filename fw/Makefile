@@ -72,11 +72,16 @@ endif
 # Project, sources and paths
 #
 
+R2P_ROOT ?= /opt/R2P
+CHIBIOS=$(R2P_ROOT)/core/ChibiOS_2.6.5
+RTCAN=$(R2P_ROOT)/core/RTCAN
+R2P=$(R2P_ROOT)/core/Middleware
+
+
 # Define project name here
 PROJECT = fw
 
 # Imported source files and paths
-include ../../paths.mk
 include ./board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F30x/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
