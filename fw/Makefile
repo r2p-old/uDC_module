@@ -111,19 +111,19 @@ CSRC = $(PORTSRC) \
        qei.c \
        qei_lld.c
 
-ifeq ($(TEST),blinking_led)
-  CSRC += test/blinking_led.c
-endif
-
-ifeq ($(TEST),hardware_test)
-CSRC += test/hardware_test.c
-endif
-
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(R2PSRC) \
          $(R2PNODES)/led.cpp \
          chnew.cpp
+
+ifeq ($(TEST),blinking_led)
+	CSRC += test/blinking_led.c
+endif
+
+ifeq ($(TEST),hardware_test)
+	CPPSRC += test/hardware_test.cpp
+endif
 
 ifeq ($(TEST),)
   CPPSRC += main.cpp

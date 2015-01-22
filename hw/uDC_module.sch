@@ -14056,6 +14056,7 @@ Source: www.kingbright.com</description>
 <vertex x="-0.5" y="1.5"/>
 <vertex x="-1" y="1.5"/>
 </polygon>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
 </package>
 <package name="SO-08">
 <description>&lt;B&gt;Small Outline Narrow Plastic Gull Wing&lt;/B&gt;&lt;p&gt;
@@ -14098,7 +14099,7 @@ Source: www.kingbright.com</description>
 Source: http://datasheets.maxim-ic.com/en/ds/MAX4335-MAX4338.pdf</description>
 <wire x1="-1.45" y1="0.825" x2="1.45" y2="0.825" width="0.1016" layer="51"/>
 <wire x1="1.45" y1="0.825" x2="1.45" y2="-0.825" width="0.1016" layer="21"/>
-<wire x1="1.45" y1="-0.825" x2="-1.45" y2="-0.825" width="0.1016" layer="51"/>
+<wire x1="1.45" y1="-0.825" x2="-1.45" y2="-0.825" width="0.1016" layer="21"/>
 <wire x1="-1.45" y1="-0.825" x2="-1.45" y2="0.825" width="0.1016" layer="21"/>
 <circle x="-1.15" y="-0.525" radius="0.125" width="0" layer="21"/>
 <smd name="1" x="-0.975" y="-1.225" dx="0.45" dy="1" layer="1"/>

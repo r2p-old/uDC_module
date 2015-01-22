@@ -12,10 +12,8 @@
 #define R2P_MODULE_NAME "uDC"
 #endif
 
-#define MOTOR_ID 1
-
-#define _TICKS 64.0f
-#define _RATIO 29.0f
+#define _TICKS 48.0f
+#define _RATIO 30.0f
 #define _PI 3.14159265359f
 
 #define R2T(r) ((r / (2 * _PI)) * (_TICKS * _RATIO))
@@ -55,16 +53,17 @@ static void pwmcb(PWMDriver *pwmp) {
 static PWMConfig pwmcfg = { 18000000, /* 72MHz PWM clock frequency.   */
 4096, /* 12-bit PWM, 17KHz frequency. */
 pwmcb, { { PWM_OUTPUT_ACTIVE_HIGH, NULL }, { PWM_OUTPUT_ACTIVE_HIGH, NULL }, { PWM_OUTPUT_DISABLED, NULL }, {
-	PWM_OUTPUT_DISABLED, NULL } }, 0, 0};
+	PWM_OUTPUT_DISABLED, NULL } }, 0, };
 
 /*
  * PWM subscriber node
  */
 
 msg_t pwm_node(void * arg) {
-	r2p::Node node("pwmsub");
-	r2p::Subscriber<r2p::PWMMsg, 5> pwm_sub;
-	r2p::PWMMsg * msgp;
+	uint8_t index = *(reinterpret_cast<uint8_t *>(arg));
+	r2p::Node node("pwm2sub");
+	r2p::Subscriber<r2p::PWM2Msg, 5> pwm_sub;
+	r2p::PWM2Msg * msgp;
 
 	(void) arg;
 
@@ -80,15 +79,15 @@ msg_t pwm_node(void * arg) {
 	for (;;) {
 		if (node.spin(r2p::Time::ms(1000))) {
 			if (pwm_sub.fetch(msgp)) {
-				pwm = msgp->value;
+				pwm = msgp->value[index];
 				chSysLock()
 				;
 				if (pwm >= 0) {
-					pwm_lld_enable_channel(&PWMD1, 0, msgp->value);
+					pwm_lld_enable_channel(&PWMD1, 0, msgp->value[index]);
 					pwm_lld_enable_channel(&PWMD1, 1, 0);
 				} else {
 					pwm_lld_enable_channel(&PWMD1, 0, 0);
-					pwm_lld_enable_channel(&PWMD1, 1, -msgp->value);
+					pwm_lld_enable_channel(&PWMD1, 1, -msgp->value[index]);
 				}
 				chSysUnlock();
 				pwm_sub.release(*msgp);
@@ -116,8 +115,9 @@ struct pid_conf {
 bool enc_callback(const r2p::EncoderMsg &msg) {
 
 	pwm = speed_pid.update(msg.delta);
-
-	chSysLock();
+	pwm = 4096;
+	chSysLock()
+	;
 
 	if (pwm > 0) {
 		pwm_lld_enable_channel(&PWM_DRIVER, 1, pwm);
@@ -134,11 +134,9 @@ bool enc_callback(const r2p::EncoderMsg &msg) {
 msg_t pid_node(void * arg) {
 	pid_conf * conf = reinterpret_cast<pid_conf *>(arg);
 	r2p::Node node("pid");
-	r2p::Subscriber<r2p::Speed2Msg, 5> speed_sub;
+	r2p::Subscriber<r2p::SpeedMsg, 5> speed_sub;
 	r2p::Subscriber<r2p::EncoderMsg, 5> enc_sub(enc_callback);
-	r2p::Subscriber<r2p::PIDCfgMsg, 5> cfg_sub;
-	r2p::Speed2Msg * msgp;
-	r2p::PIDCfgMsg *cfgp;
+	r2p::SpeedMsg * msgp;
 	r2p::Time last_setpoint(0);
 
 	(void) arg;
@@ -151,29 +149,20 @@ msg_t pid_node(void * arg) {
 	chThdSleepMilliseconds(500);
 	pwmStart(&PWM_DRIVER, &pwmcfg);
 
-	node.subscribe(speed_sub, "speed2");
+	node.subscribe(speed_sub, "speed");
 	node.subscribe(enc_sub, "encoder");
-	node.subscribe(cfg_sub, "pidcfg");
 
 	for (;;) {
-		// Check for PID configuration parameters
-		if (cfg_sub.fetch(cfgp)) {
-			speed_pid.config(cfgp->k, cfgp->ti, cfgp->td, 0.02, -4095, 4095);
-			cfg_sub.release(*cfgp);
-		}
-
 		if (node.spin(r2p::Time::ms(1000))) {
-			// Check for speed setpoint
 			if (speed_sub.fetch(msgp)) {
-				speed_pid.set(msgp->value[MOTOR_ID]);
+				speed_pid.set(msgp->value);
 				last_setpoint = r2p::Time::now();
 				speed_sub.release(*msgp);
 			} else if (r2p::Time::now() - last_setpoint > r2p::Time::ms(1000)) {
-				// Set speed to 0 if no speed messages for 1000 ms
 				speed_pid.set(0);
 			}
 		} else {
-			// Stop motor if no encoder messages for 1000 ms
+			// Stop motor if no messages for 1000 ms
 			pwm_lld_disable_channel(&PWM_DRIVER, 0);
 			pwm_lld_disable_channel(&PWM_DRIVER, 1);
 		}
