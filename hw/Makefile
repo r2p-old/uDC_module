@@ -65,7 +65,7 @@ mkdir:
 	$(EAGLE) -X -N -d GERBER_RS274X -o $(GERBERS_PATH)/$@ $< bStop
 # Bottom layer - silkscreen
 %.GBO : %.brd
-	$(EAGLE) -X -N -d GERBER_RS274X -o $(GERBERS_PATH)/$@ $< Dimension
+	$(EAGLE) -X -N -d GERBER_RS274X -o $(GERBERS_PATH)/$@ $< Dimension 200bmp
 # Bottom layer - solder paste
 %.GBP: %.brd
 	$(EAGLE) -X -N -d GERBER_RS274X -o $(GERBERS_PATH)/$@ $< bCream
@@ -97,15 +97,6 @@ assembly-top:  $(PROJECT_NAME).GTL $(PROJECT_NAME).GTS $(PROJECT_NAME).GTO $(PRO
 	--foreground=#$(ASSEMBLY_COLOUR) $(GERBERS_PATH)/$(PROJECT_NAME).names \
 	--foreground=#$(SILKSCREEN_COLOUR) $(GERBERS_PATH)/$(PROJECT_NAME).place \
 	--foreground=#$(SILKSCREEN_COLOUR) $(GERBERS_PATH)/$(PROJECT_NAME).GTO `
-
-
-#	$(EAGLE) -X -N -d PS -r -s4 -x.3 -y2.8 -o $(PROJECT_NAME)-components-top.ps $(BOARD) tPlace tDocu Dimension Holes Milling Measures Document
-#	$(EAGLE) -X -N -d PS -r -s4 -x.3 -y2.8 -o $(PROJECT_NAME)-names-top.ps $(BOARD) tNames
-#	ps2pdf $(PROJECT_NAME)-components-top.ps $(PROJECT_NAME)-components-top.pdf
-#	ps2pdf $(PROJECT_NAME)-names-top.ps $(PROJECT_NAME)-names-top.pdf
-#	pdftk  $(PROJECT_NAME)-names-top.pdf background  $(PROJECT_NAME)-components-top.pdf output  $(PROJECT_NAME)-assembly-top.pdf
-#	@rm $(PROJECT_NAME)-assembly.ps
-
 	
 png:  $(PROJECT_NAME).GTL $(PROJECT_NAME).GTS $(PROJECT_NAME).GTO $(PROJECT_NAME).GTP $(PROJECT_NAME).GBL $(PROJECT_NAME).GBS $(PROJECT_NAME).GBO $(PROJECT_NAME).GBP  $(PROJECT_NAME).TXT $(PROJECT_NAME).GML $(PROJECT_NAME).place
 	`gerbv --export=png --output=$(PROJECT_NAME)-layout.png --dpi=$(GERBER_IMAGE_RESOLUTION) --background=#000000 \
